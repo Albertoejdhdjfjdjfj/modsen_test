@@ -32,6 +32,11 @@
   height: 30px;
   display: flex;
   align-items: center;
+  opacity: 50%;
+}
+
+.categories_list > div > .active_category {
+  opacity: 100%;
 }
 
 .categories_list > div > div > img {
