@@ -1,4 +1,4 @@
-import React from 'react';
+import { YMaps } from '@pbe/react-yandex-maps';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -20,7 +20,9 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <YMaps>
+        <App />
+      </YMaps>
     </BrowserRouter>
   </Provider>,
   rootElement

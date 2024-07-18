@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { categories, Category } from '../../../assets/constants/categories';
+import { categories, Category } from '../../../../assets/constants/categories';
 
 import {
   addCategory,
   deleteCategory
-} from '../../../redux/reducers/filter_reducer/actions/actions';
-import { State } from '../../../redux/combine_reducers';
+} from '../../../../redux/reducers/filter_reducer/actions/actions';
+import { State } from '../../../../redux/combine_reducers';
 import './CategoriesList.css';
 
 const CategoriesList = () => {

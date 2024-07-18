@@ -22,10 +22,3 @@ export function setRadius(payload: number): Action<number> {
     payload: payload
   };
 }
-
-export function inputText(payload: string): Action<string> {
-  return {
-    type: INPUT_TEXT,
-    payload: payload
-  };
-}

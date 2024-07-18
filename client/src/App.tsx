@@ -1,16 +1,13 @@
-import SearchPlaces from './components/SearchPlaces/SearchPlaces';
+import Panel from './components/Panel/Panel';
 import Navbar from './components/Navbar/Navbar';
 import YandexMap from './components/YandexMap/YandexMap';
-import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
 const App = () => {
   return (
     <div className="App">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<SearchPlaces />} />
-      </Routes>
+      <Panel />
       <YandexMap />
     </div>
   );

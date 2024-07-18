@@ -5,8 +5,7 @@ import { FilterState } from '../interfaces';
 
 const initialState: FilterState = {
   categories: [],
-  radius: 0,
-  input: ''
+  radius: 0
 };
 
 export function filter_reducer(
@@ -45,15 +44,6 @@ export function filter_reducer(
         return {
           ...state,
           radius: action.payload
-        };
-      }
-      break;
-
-    case INPUT_TEXT:
-      if (typeof action.payload === 'string') {
-        return {
-          ...state,
-          input: action.payload
         };
       }
       break;

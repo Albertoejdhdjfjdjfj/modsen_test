@@ -8,7 +8,6 @@ export interface Action<T> {
 export interface FilterState {
   categories: Array<Category>;
   radius: number;
-  input: string;
 }
 
 export interface YandexMapResponse {
@@ -31,9 +30,13 @@ export interface Feature {
       name: string;
       address: string;
       url?: string;
+      Phones: Array<{ type: string; formatted: string }>;
       Categories: {
         name: string;
       }[];
+      Hours: {
+        text: string;
+      };
     };
   };
 }
@@ -45,4 +48,8 @@ export interface CategoryPlaces {
 
 export interface MapState {
   places: Array<CategoryPlaces>;
+}
+
+export interface PlaceState {
+  place: Feature | null;
 }

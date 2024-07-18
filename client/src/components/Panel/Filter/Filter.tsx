@@ -1,14 +1,13 @@
 import CategoriesList from './CategoriesList/CategoriesList';
-import SearchInput from './SearchInput/SearchInput';
 import NumberInput from './NumberInput/NumberInput';
 import { useDispatch, useSelector } from 'react-redux';
-import useLocation from '../../assets/hooks/useLocation';
-import { fetchPlaces } from '../../redux/reducers/map_reducer/actions/actions';
-import glass from '../../assets/images/white_glass.svg';
-import './SearchPlaces.css';
-import { State } from '../../redux/combine_reducers';
+import useLocation from '../../../assets/hooks/useLocation';
+import { fetchPlaces } from '../../../redux/reducers/map_reducer/actions/actions';
+import glass from '../../../assets/images/white_glass.svg';
+import './Filter.css';
+import { State } from '../../../redux/combine_reducers';
 
-const SearchPlaces = () => {
+const Filter = () => {
   const [location] = useLocation([55.76, 37.64]);
   const filterState = useSelector((state: State) => state.filter_state);
   const dispatch = useDispatch();
@@ -21,8 +20,7 @@ const SearchPlaces = () => {
   }
 
   return (
-    <form className="search_places">
-      <SearchInput />
+    <form className="filter">
       <CategoriesList />
       <NumberInput />
       <button type="button" onClick={sendForm}>
@@ -32,4 +30,4 @@ const SearchPlaces = () => {
   );
 };
 
-export default SearchPlaces;
+export default Filter;

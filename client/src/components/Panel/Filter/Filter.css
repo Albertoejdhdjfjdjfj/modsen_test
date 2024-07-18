@@ -1,4 +1,4 @@
-.search_places {
+.filter {
   width: 400px;
   height: 1080px;
   display: flex;
@@ -6,7 +6,7 @@
   padding: 25px 25px 36px 25px;
 }
 
-.search_places > button {
+.filter > button {
   margin-top: auto;
   width: 350px;
   height: 60px;
@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.search_places > button > img {
+.filter > button > img {
   width: 22px;
   height: 22px;
 }

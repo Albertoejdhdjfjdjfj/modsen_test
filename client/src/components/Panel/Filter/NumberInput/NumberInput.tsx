@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setRadius } from '../../../redux/reducers/filter_reducer/actions/actions';
-import { State } from '../../../redux/combine_reducers';
+import { setRadius } from '../../../../redux/reducers/filter_reducer/actions/actions';
+import { State } from '../../../../redux/combine_reducers';
 import './NumberInput.css';
 
 const NumberInput = () => {
