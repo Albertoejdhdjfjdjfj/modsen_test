@@ -69,11 +69,19 @@ const YandexMap = () => {
         {way && (
           <>
             <Polyline
-              geometry={[location,...(way.routes[0].geometry.coordinates.map((el:[number,number])=>el.reverse()))]}
+              geometry={[location,...(way.routes[0].geometry.coordinates.map((el:[number,number])=>el.reverse())),endPoint?.reverse]}
               options={{
                 strokeColor: '#C75E5E',
                 strokeWidth: 8
               }}
+            />
+
+            <Placemark
+              geometry={location}
+            />
+
+            <Placemark
+              geometry={endPoint?.reverse()}
             />
           </>
         )}

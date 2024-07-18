@@ -1,0 +1,10 @@
+.route_card {
+  width: 200px;
+  height: 50px;
+  background-color: red;
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  left: 50%;
+}
