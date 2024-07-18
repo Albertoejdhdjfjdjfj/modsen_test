@@ -10,7 +10,7 @@ const YandexMap = () => {
   const location: [number, number] = useSelector((state: State) => state.map_state.location);
   const places: Array<CategoryPlaces> = useSelector((state: State) => state.map_state.places);
   const radius: number = useSelector((state: State) => state.filter_state.radius);
-  const way: WayResponse | null = useSelector((state: State) => state.map_state.way);
+  const way: Array<[number,number]> | undefined = useSelector((state: State) => state.map_state.way?.routes[0].geometry.coordinates);
   const endPoint: [number, number] | null = useSelector((state: State) => state.map_state.endPoint);
 
   return (
@@ -69,7 +69,7 @@ const YandexMap = () => {
         {way && (
           <>
             <Polyline
-              geometry={[location,...(way.routes[0].geometry.coordinates.map((el:[number,number])=>el.reverse())),endPoint?.reverse]}
+              geometry={[location,...(way.map(([a, b]) => [b, a])),[endPoint[1],endPoint[0]]]}
               options={{
                 strokeColor: '#C75E5E',
                 strokeWidth: 8
@@ -77,11 +77,10 @@ const YandexMap = () => {
             />
 
             <Placemark
-              geometry={location}
-            />
-
-            <Placemark
-              geometry={endPoint?.reverse()}
+              geometry={[endPoint[1],endPoint[0]]}
+              options={{
+                iconLayout: 'default#image',
+              }}
             />
           </>
         )}
