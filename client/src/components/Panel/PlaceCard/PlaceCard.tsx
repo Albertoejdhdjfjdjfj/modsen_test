@@ -48,12 +48,12 @@ const PlaceCard = () => {
       <div>
         <img src={noPhoto} />
         <span>
-          {place?.properties.name && <h2>{place.properties.name}</h2>}
-          {place?.properties.description && <p>Адрес: {place.properties.description}</p>}
-          {place?.properties.CompanyMetaData.Hours.text && (
+          {place?.properties?.name && <h2>{place.properties.name}</h2>}
+          {place?.properties?.description && <p>Адрес: {place.properties.description}</p>}
+          {place?.properties?.CompanyMetaData?.Hours?.text && (
             <p>Время работы: {place.properties.CompanyMetaData.Hours.text}</p>
           )}
-          {place?.properties.CompanyMetaData.Phones[0].formatted && (
+          {place?.properties?.CompanyMetaData?.Phones?.[0]?.formatted && (
             <p>Телефон: {place.properties.CompanyMetaData.Phones[0].formatted}</p>
           )}
         </span>

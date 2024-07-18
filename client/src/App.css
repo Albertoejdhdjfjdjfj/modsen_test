@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: 'Mont';
   font-weight: 600;
+  position: relative;
 }
 
 .App {
