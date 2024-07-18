@@ -1,4 +1,4 @@
-import { RESPONSE_PLACE } from './actions/actionTypes';
+import { RESPONSE_PLACE, SET_PLACE } from './actions/actionTypes';
 import { Action } from '../interfaces';
 import { PlaceState, Feature } from '../interfaces';
 
@@ -12,6 +12,12 @@ export function place_reducer(
 ): PlaceState {
   switch (action.type) {
     case RESPONSE_PLACE:
+      return {
+        ...state,
+        place: action.payload
+      };
+
+    case SET_PLACE:
       return {
         ...state,
         place: action.payload

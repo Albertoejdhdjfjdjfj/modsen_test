@@ -48,8 +48,38 @@ export interface CategoryPlaces {
 
 export interface MapState {
   places: Array<CategoryPlaces>;
+  way: WayResponse | null;
+  endPoint: [number, number] | null;
+  location: [number, number];
 }
 
 export interface PlaceState {
   place: Feature | null;
+}
+
+export interface WayResponse {
+  code: string;
+  routes: {
+    geometry: {
+      coordinates: Array<[number, number]>;
+      type: string;
+    };
+    legs: {
+      steps: Array<any>;
+      summary: string;
+      weight: number;
+      duration: number;
+      distance: number;
+    }[];
+    weight_name: string;
+    weight: number;
+    duration: number;
+    distance: number;
+  }[];
+  waypoints: {
+    hint: string;
+    distance: number;
+    name: string;
+    location: [number, number];
+  }[];
 }

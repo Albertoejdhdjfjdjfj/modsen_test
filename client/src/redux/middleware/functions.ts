@@ -1,4 +1,4 @@
-import { CategoryPlaces, Feature, YandexMapResponse } from '../reducers/interfaces';
+import { CategoryPlaces, Feature, YandexMapResponse, WayResponse } from '../reducers/interfaces';
 import { Category } from '../../assets/constants/categories';
 const API_KEY = '63a11a7b-be77-459c-be69-f0bb1d042caf';
 
@@ -27,4 +27,17 @@ export async function fetchPlace(place: string): Promise<Feature> {
   const data: YandexMapResponse = await response.json();
 
   return data.features[0];
+}
+
+export async function fetchWay(
+  start: [number, number],
+  end: [number, number]
+): Promise<WayResponse> {
+  console.log(start,end)
+  const response = await fetch(
+    `https://router.project-osrm.org/route/v1/walking/${start[1]},${start[0]};${end[0]},${end[1]}?overview=full&geometries=geojson`
+  );
+  const data: WayResponse = await response.json();
+
+  return data;
 }

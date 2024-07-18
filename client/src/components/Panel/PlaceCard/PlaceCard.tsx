@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchWay, setEndPoint } from '../../../redux/reducers/map_reducer/actions/actions';
 import { State } from '../../../redux/combine_reducers';
 import { Feature } from '../../../redux/reducers/interfaces';
 import { useLocalStorage } from '../../../assets/constants/useLocalStorage';
@@ -11,6 +12,8 @@ import './PlaceCard.css';
 const PlaceCard = () => {
   const [favorites, addCard, deleteCard] = useLocalStorage();
   const place: Feature | null = useSelector((state: State) => state.place_state.place);
+  const location: [number, number] | null = useSelector((state: State) => state.map_state.location);
+  const dispatch = useDispatch();
 
   function inFavorites() {
     const index = favorites.findIndex(
@@ -32,6 +35,11 @@ const PlaceCard = () => {
     }
   }
 
+  function getWay() {
+    dispatch(setEndPoint(place?.geometry.coordinates));
+    dispatch(fetchWay({ start: location, end: place?.geometry.coordinates }));
+  }
+
   return (
     <div className="place_card">
       <p>
@@ -50,14 +58,15 @@ const PlaceCard = () => {
           )}
         </span>
 
-        <div>
+       { place?.geometry.coordinates&& <div>
           <p onClick={handleClickFavorites}>
             <img src={bookmark} /> {inFavorites() ? 'Сохранено' : 'Сохранить'}
           </p>
-          <p>
+          <p onClick={getWay}>
             <img src={mapMark} /> Маршрут
           </p>
         </div>
+}
       </div>
     </div>
   );

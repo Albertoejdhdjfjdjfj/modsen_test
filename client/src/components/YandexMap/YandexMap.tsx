@@ -1,19 +1,22 @@
-import { YMaps, Map, Placemark, Circle } from '@pbe/react-yandex-maps';
+import { Map, Placemark, Circle, Polyline } from '@pbe/react-yandex-maps';
 import useLocation from '../../assets/hooks/useLocation';
 import userMark from '../../assets/images/userMark.svg';
 import './YandexMap.css';
 import { useSelector } from 'react-redux';
 import { State } from '../../redux/combine_reducers';
-import { CategoryPlaces } from '../../redux/reducers/interfaces';
+import { CategoryPlaces, WayResponse } from '../../redux/reducers/interfaces';
 
 const YandexMap = () => {
-  const [location] = useLocation([55.76, 37.64]);
+  const location: [number, number] = useSelector((state: State) => state.map_state.location);
   const places: Array<CategoryPlaces> = useSelector((state: State) => state.map_state.places);
   const radius: number = useSelector((state: State) => state.filter_state.radius);
+  const way: WayResponse | null = useSelector((state: State) => state.map_state.way);
+  const endPoint: [number, number] | null = useSelector((state: State) => state.map_state.endPoint);
+
   return (
     <div className="map_wrapper">
       <Map
-        defaultState={{
+        state={{
           center: location,
           zoom: 20
         }}
@@ -61,6 +64,18 @@ const YandexMap = () => {
               }}
             />
           ))
+        )}
+
+        {way && (
+          <>
+            <Polyline
+              geometry={[location,...(way.routes[0].geometry.coordinates.map((el:[number,number])=>el.reverse()))]}
+              options={{
+                strokeColor: '#C75E5E',
+                strokeWidth: 8
+              }}
+            />
+          </>
         )}
       </Map>
     </div>

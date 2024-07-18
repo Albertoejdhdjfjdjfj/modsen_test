@@ -1,14 +1,14 @@
 import { takeEvery, put, all, call } from 'redux-saga/effects';
-import { FETCH_PLACES } from '../reducers/map_reducer/actions/actionTypes';
+import { FETCH_PLACES, FETCH_WAY } from '../reducers/map_reducer/actions/actionTypes';
 import { FETCH_PLACE } from '../reducers/place_reducer/actions/actionTypes';
-import { responsePlaces } from '../reducers/map_reducer/actions/actions';
+import { responsePlaces, responseWay } from '../reducers/map_reducer/actions/actions';
 import { responsePlace } from '../reducers/place_reducer/actions/actions';
-import { Action, CategoryPlaces, Feature } from '../reducers/interfaces';
+import { Action, CategoryPlaces, Feature, WayResponse } from '../reducers/interfaces';
 import { Category } from '../../assets/constants/categories';
-import { fetchCategoryPlaces, fetchPlace } from './functions';
+import { fetchCategoryPlaces, fetchPlace, fetchWay } from './functions';
 
 export function* rootSaga() {
-  yield all([watchCategoryPlaces(), watchPlace()]);
+  yield all([watchCategoryPlaces(), watchPlace(), watchWay()]);
 }
 
 function* watchCategoryPlaces() {
@@ -30,4 +30,15 @@ function* watchPlace() {
 function* getPlace(action: Action<string>) {
   const data: Feature = yield call(fetchPlace, action.payload);
   yield put(responsePlace(data));
+}
+
+function* watchWay() {
+  yield takeEvery(FETCH_WAY, getWay);
+}
+
+function* getWay(
+  action: Action<{ start: [number, number]; end: [number, number] }>
+): Generator<any, void, WayResponse> {
+  const data: WayResponse = yield call(fetchWay, action.payload.start, action.payload.end);
+  yield put(responseWay(data));
 }

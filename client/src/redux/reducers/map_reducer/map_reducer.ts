@@ -1,20 +1,41 @@
-import { RESPONSE_PLACES } from './actions/actionTypes';
+import { RESPONSE_PLACES, RESPONSE_WAY, SET_END_POINT, SET_LOCTAION } from './actions/actionTypes';
 import { Action } from '../interfaces';
 import { MapState, CategoryPlaces } from '../interfaces';
 
 const initialState: MapState = {
-  places: []
+  places: [],
+  way: null,
+  location: [55.76, 37.64],
+  endPoint: null
 };
 
 export function map_reducer(
   state: MapState = initialState,
-  action: Action<Array<CategoryPlaces>>
+  action: Action<Array<CategoryPlaces> | Array<[number, number] | [number, number]>>
 ): MapState {
   switch (action.type) {
     case RESPONSE_PLACES:
       return {
         ...state,
         places: action.payload
+      };
+
+    case RESPONSE_WAY:
+      return {
+        ...state,
+        way: action.payload
+      };
+
+    case SET_END_POINT:
+      return {
+        ...state,
+        endPoint: action.payload
+      };
+
+    case SET_LOCTAION:
+      return {
+        ...state,
+        location: action.payload
       };
   }
 
