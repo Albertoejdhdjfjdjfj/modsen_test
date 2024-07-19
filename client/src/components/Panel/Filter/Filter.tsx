@@ -3,7 +3,7 @@ import NumberInput from './NumberInput/NumberInput';
 import { useDispatch, useSelector } from 'react-redux';
 import useLocation from '../../../assets/hooks/useLocation';
 import { fetchPlaces } from '../../../redux/reducers/map_reducer/actions/actions';
-import glass from '../../../assets/images/white_glass.svg';
+import glass from '../../../assets/images/whiteGlass.svg';
 import './Filter.css';
 import { State } from '../../../redux/combine_reducers';
 
@@ -21,7 +21,9 @@ const Filter = () => {
 
   return (
     <form className="filter">
+      <label>Искать:</label>
       <CategoriesList />
+      <label>В радиусе</label>
       <NumberInput />
       <button type="button" onClick={sendForm}>
         <img src={glass} />

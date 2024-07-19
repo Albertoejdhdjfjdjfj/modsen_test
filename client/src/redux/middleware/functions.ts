@@ -1,6 +1,6 @@
 import { CategoryPlaces, Feature, YandexMapResponse, WayResponse } from '../reducers/interfaces';
 import { Category } from '../../assets/constants/categories';
-const API_KEY = '63a11a7b-be77-459c-be69-f0bb1d042caf';
+const API_KEY = process.env.REACT_APP_KEY_API;
 
 export async function fetchCategoryPlaces(
   categories: Array<Category>,

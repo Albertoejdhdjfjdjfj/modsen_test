@@ -5,13 +5,15 @@ import { Suggest } from './interfaces';
 import { fetchPlace } from '../../../redux/reducers/place_reducer/actions/actions';
 import glass from '../../../assets/images/glass.svg';
 import './SearchInput.css';
-const API_KEY = '95c24851-aa47-490c-972c-4c89d701df0c';
+const API_KEY = process.env.REACT_APP_KEY_API_AUTO_COMPLETE;
 
 const SearchInput = () => {
   const [suggstions, setSuggestions] = useState<Array<Suggest> | null>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  console.log(API_KEY)
 
   async function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
     const data = await fetch(

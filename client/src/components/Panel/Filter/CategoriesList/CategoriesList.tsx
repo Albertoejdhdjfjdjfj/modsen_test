@@ -3,7 +3,7 @@ import { categories, Category } from '../../../../assets/constants/categories';
 
 import {
   addCategory,
-  deleteCategory
+  deleteCategory 
 } from '../../../../redux/reducers/filter_reducer/actions/actions';
 import { State } from '../../../../redux/combine_reducers';
 import './CategoriesList.css';

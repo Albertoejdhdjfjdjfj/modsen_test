@@ -5,7 +5,7 @@ import { FilterState } from '../interfaces';
 
 const initialState: FilterState = {
   categories: [],
-  radius: 0
+  radius: 5
 };
 
 export function filter_reducer(

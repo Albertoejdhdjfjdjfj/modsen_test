@@ -4,7 +4,8 @@ import {
   FETCH_WAY,
   RESPONSE_WAY,
   SET_END_POINT,
-  SET_LOCTAION
+  SET_LOCTAION,
+  STOP_ROUTE
 } from './actionTypes';
 import { Action, WayResponse } from '../../interfaces';
 import { CategoryPlaces } from '../../interfaces';
@@ -56,5 +57,12 @@ export function setEndPoint(payload: [number, number]): Action<[number, number]>
   return {
     type: SET_END_POINT,
     payload: payload
+  };
+}
+
+export function stopRoute(): Action<undefined> {
+  return {
+    type: STOP_ROUTE,
+    payload: undefined
   };
 }

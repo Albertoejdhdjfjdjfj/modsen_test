@@ -1,10 +1,12 @@
 import { Map, Placemark, Circle, Polyline } from '@pbe/react-yandex-maps';
-import useLocation from '../../assets/hooks/useLocation';
 import userMark from '../../assets/images/userMark.svg';
 import './YandexMap.css';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { fetchPlace } from '../../redux/reducers/place_reducer/actions/actions';
 import { State } from '../../redux/combine_reducers';
-import { CategoryPlaces, WayResponse } from '../../redux/reducers/interfaces';
+import { CategoryPlaces, Feature, WayResponse } from '../../redux/reducers/interfaces';
+import RouteCard from './RouteCard/RouteCard';
 
 const YandexMap = () => {
   const location: [number, number] = useSelector((state: State) => state.map_state.location);
@@ -12,13 +14,20 @@ const YandexMap = () => {
   const radius: number = useSelector((state: State) => state.filter_state.radius);
   const way: Array<[number,number]> | undefined = useSelector((state: State) => state.map_state.way?.routes[0].geometry.coordinates);
   const endPoint: [number, number] | null = useSelector((state: State) => state.map_state.endPoint);
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
+
+  function placeClick(place:Feature){
+    dispatch(fetchPlace(place.properties.CompanyMetaData.address));
+    navigate('/card')
+  }
 
   return (
     <div className="map_wrapper">
       <Map
         state={{
           center: location,
-          zoom: 20
+          zoom: 16
         }}
         width="100%"
         height="100%"
@@ -44,7 +53,7 @@ const YandexMap = () => {
           }}
         />
         <Circle
-          geometry={[location, 100]}
+          geometry={[location, radius*100]}
           options={{
             fillColor: '#5E7BC7',
             fillOpacity: 0.2,
@@ -54,6 +63,7 @@ const YandexMap = () => {
         {places.map((el: CategoryPlaces) =>
           el.places.map((place) => (
             <Placemark
+              onClick={()=>placeClick(place)}
               key={place.properties.CompanyMetaData.id}
               geometry={[place.geometry.coordinates[1], place.geometry.coordinates[0]]}
               options={{
@@ -85,6 +95,7 @@ const YandexMap = () => {
           </>
         )}
       </Map>
+      {way&&<RouteCard/>}
     </div>
   );
 };
